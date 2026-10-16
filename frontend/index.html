@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="TireGuard AI-powered tire quality inspection.">
+  <title>TireGuard — AI Tire Inspection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/script.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="navbar">
+      <a class="brand" href="/" aria-label="TireGuard home">
+        <span class="brand-icon"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="1" y="1" width="38" height="38" rx="12" fill="#15803D"/><circle cx="20" cy="20" r="10" stroke="white" stroke-width="3.5"/><circle cx="20" cy="20" r="3" fill="#FACC15"/><path d="M20 10v4M20 26v4M10 20h4M26 20h4" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+        <span class="brand-copy"><strong>TireGuard</strong><small>INTELLIGENT INSPECTION</small></span>
+      </a>
+
+      <div class="nav-right">
+        <span class="nav-label">AI INSPECTION PLATFORM</span>
+        <span class="api-status" id="apiStatus">
+          <span class="status-dot"></span>
+          <span id="apiStatusText">Checking API</span>
+        </span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> AI-POWERED TIRE ANALYSIS</div>
+          <h1>See beyond the surface.<br><span>Drive with confidence.</span></h1>
+          <p>Upload a tire image and let AI assess its visual condition in seconds.</p>
+          <div class="hero-points">
+            <span><span class="mini-check">✓</span> Instant analysis</span>
+            <span><span class="mini-check">✓</span> Confidence scores</span>
+            <span><span class="mini-check">✓</span> Simple workflow</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="hero-tire">
+            <div class="tire-side">
+              <div class="tire-rim"><div class="rim-core"></div></div>
+            </div>
+          </div>
+          <span class="float-tag tag-top"><span class="float-dot green-dot"></span> AI VISION</span>
+          <span class="float-tag tag-bottom"><span class="float-dot yellow-dot"></span> SMART INSPECTION</span>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Tire image analysis">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">WORKSPACE / 01</span>
+            <h2>Inspect your tire</h2>
+            <p>Start with a clear photo of the tire you want to inspect.</p>
+          </div>
+          <div class="step-chip"><span>01</span> UPLOAD <i></i><span>02</span> ANALYZE</div>
+        </div>
+
+        <div class="main-grid">
+          <section class="panel upload-panel">
+            <div class="panel-heading">
+              <div class="panel-title-group">
+                <span class="panel-icon green-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 002 2h10a2 2 0 002-2v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <div><h3>Image input</h3><p>Upload your tire photo</p></div>
+              </div>
+              <span class="required-tag">REQUIRED</span>
+            </div>
+
+            <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+
+            <button type="button" id="dropZone" class="drop-zone" aria-label="Choose or drop a tire image">
+              <div id="placeholder" class="upload-placeholder">
+                <div class="upload-icon-wrap"><svg viewBox="0 0 48 48" fill="none"><rect x="7" y="7" width="34" height="34" rx="10" stroke="currentColor" stroke-width="1.7"/><circle cx="18" cy="18" r="3.5" stroke="currentColor" stroke-width="1.7"/><path d="M9 32l10-9 7 6 5-5 8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <strong>Drop your image here</strong>
+                <span>or click to browse files</span>
+                <span class="browse-pill">Choose image <span>↗</span></span>
+                <small>JPG, PNG or WEBP <i></i> Maximum 10 MB</small>
+              </div>
+              <img id="preview" class="preview hidden" alt="Selected tire preview">
+              <span id="previewTag" class="preview-tag hidden"><span class="status-dot"></span> IMAGE READY</span>
+            </button>
+
+            <div class="file-row">
+              <div class="file-info">
+                <span class="file-type-icon">IMG</span>
+                <div class="file-copy"><strong id="fileName">No image selected</strong><small id="fileMeta">Your image details will appear here</small></div>
+              </div>
+              <button type="button" id="removeBtn" class="icon-button hidden" aria-label="Remove image" title="Remove image">×</button>
+            </div>
+
+            <div id="errorMessage" class="error-message hidden" role="alert"></div>
+
+            <button type="button" id="analyzeBtn" class="analyze-button" disabled>
+              <span class="button-content"><span id="analyzeButtonText">Analyze tire</span><span class="button-arrow">↗</span></span>
+              <span class="button-shine"></span>
+            </button>
+            <p class="privacy-note"><svg viewBox="0 0 20 20" fill="none"><rect x="4.5" y="8.5" width="11" height="8" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M7 8.5V6a3 3 0 016 0v2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Your image is processed for analysis.</p>
+          </section>
+
+          <section class="panel results-panel" aria-live="polite">
+            <div class="panel-heading">
+              <div class="panel-title-group">
+                <span class="panel-icon black-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 15v-4m5 4V7m5 8V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+                <div><h3>Analysis results</h3><p>AI-powered visual assessment</p></div>
+              </div>
+              <span class="live-tag"><span></span> LIVE RESULTS</span>
+            </div>
+
+            <div id="emptyResult" class="empty-result">
+              <div class="result-illustration">
+                <div class="result-ring ring-a"></div><div class="result-ring ring-b"></div>
+                <div class="result-center"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="3.5"/><circle cx="24" cy="24" r="7" stroke="currentColor" stroke-width="3.5"/><circle cx="24" cy="24" r="2" fill="currentColor"/></svg></div>
+                <span class="illustration-spark spark-a">✳</span><span class="illustration-spark spark-b">✦</span>
+              </div>
+              <h3>Ready when you are</h3>
+              <p>Your results will appear here after the image has been analyzed.</p>
+              <div class="empty-steps"><span><b>1</b> Upload image</span><span class="step-line"></span><span><b>2</b> Run analysis</span></div>
+            </div>
+
+            <div id="loadingResult" class="loading-result hidden">
+              <div class="loader-ring"></div>
+              <h3>Analyzing your image</h3>
+              <p>Our AI model is evaluating the tire's visual features.</p>
+              <div class="loading-track"><span></span></div>
+              <small>PLEASE WAIT</small>
+            </div>
+
+            <div id="predictionResult" class="prediction-result hidden">
+              <div id="resultBadge" class="result-badge good">
+                <span id="resultSymbol" class="result-symbol">✓</span>
+                <div><small>CLASSIFICATION</small><h3 id="resultLabel">Good tire</h3></div>
+                <span class="result-status-pill" id="resultStatusPill">GOOD</span>
+              </div>
+
+              <div class="confidence-section">
+                <div class="confidence-heading"><div><span class="section-kicker">MODEL CONFIDENCE</span><h3>Prediction confidence</h3></div><strong id="confidenceValue">0.00%</strong></div>
+                <div class="confidence-track"><div id="confidenceBar" class="confidence-fill" style="width:0%"></div></div>
+                <p class="confidence-caption">Confidence reflects the model's output, not a guarantee of tire safety.</p>
+              </div>
+
+              <div class="probability-section">
+                <div class="probability-title"><h3>Class probabilities</h3><span>MODEL OUTPUT</span></div>
+                <div class="probability-row">
+                  <div class="probability-label"><span class="prob-dot good-dot"></span><span>Good tire</span><strong id="goodProbability">0.00%</strong></div>
+                  <div class="probability-track"><div id="goodBar" class="probability-fill good-fill" style="width:0%"></div></div>
+                </div>
+                <div class="probability-row">
+                  <div class="probability-label"><span class="prob-dot bad-dot"></span><span>Defective tire</span><strong id="defectiveProbability">0.00%</strong></div>
+                  <div class="probability-track"><div id="defectiveBar" class="probability-fill bad-fill" style="width:0%"></div></div>
+                </div>
+              </div>
+
+              <div class="result-disclaimer"><span>!</span><p>This is an AI-based visual screening result, not a professional safety inspection. Check the tire with a qualified technician if you have concerns.</p></div>
+              <button type="button" id="newAnalysisBtn" class="secondary-button">Analyze another image <span>↻</span></button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="feature-strip">
+        <div class="feature-item"><span class="feature-icon feature-green">✳</span><div><strong>AI-Powered</strong><p>Deep learning image classification</p></div></div>
+        <div class="feature-item"><span class="feature-icon feature-yellow">↯</span><div><strong>Fast Analysis</strong><p>Results in just a few seconds</p></div></div>
+        <div class="feature-item"><span class="feature-icon feature-red">◎</span><div><strong>Clear Insights</strong><p>Class predictions and confidence</p></div></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a class="footer-brand" href="/">TireGuard<span>®</span></a>
+      <p>Built with AI. Designed for clarity.</p>
+      <span class="footer-version"><span></span> TIREGUARD AI</span>
+    </footer>
+  </div>
+</body>
+</html>
