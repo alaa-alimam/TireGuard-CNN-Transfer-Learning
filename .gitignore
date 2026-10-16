@@ -6,7 +6,7 @@ venv/
 .vscode/
 .ipynb_checkpoints/
 .env
-.vercel.json
+
 # Keep the trained model
 !model/
 !model/**
